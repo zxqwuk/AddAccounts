@@ -19,7 +19,7 @@ param(
     [switch] $Change, # Change Accounts after onboarding
     [switch] $Reconcile, # Reconcile Accounts after onboarding
     [String] $PVWA, # PVWA URL
-    [String] $LogDir = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("..\..\Logs\OnboardLog-$(Get-Date -Format 'dd-MM-yyyy').csv") # Specific to VF
+    [String] $LogDir = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("..\..\Logs\OnboardLog-$(Get-Date -Format 'dd-MM-yyyy').csv") 
 )
 
 function Get-Account() {
@@ -140,7 +140,6 @@ Write-Host "                steffan" -f Red -nonewline; Write-Host " - 15/07/202
 Write-Host "-----------------------------------------------------" -f Cyan
 Write-Host "Log File Location: " -f Cyan -NoNewLine; Write-Host "$LogDir"
 
-exit
 # Importing CSV - required, check provided csv as an example
 Write-Host "CSV Location: " -f Cyan -NoNewLine; Write-Host "$CSVInput"
 try {
@@ -193,13 +192,18 @@ try {
     }
 } catch {}
 if(!$loggedin) {
-    $login_username = "<cyberark username>"
-    Write-Host "Username: $login_username"
-    $login_password = Read-Host "Password" -AsSecureString
-    $otp = Read-Host "OTP"
+    Write-Host "Username: " -f Cyan -NoNewLine
+    $login_username = Read-Host
+
+    Write-Host "Password: " -f Cyan -NoNewLine
+    $login_password = Read-Host -AsSecureString
+
+    #Write-Host "OTP: " -f Cyan -NoNewLine
+    #$otp = Read-Host
+
     $cred = New-Object System.Management.Automation.PSCredential ($login_username, $login_password)
     
-    New-PASSession -Credential $cred -BaseURI $PVWA -concurrentSession $true -Type RADIUS -OTP $OTP
+    New-PASSession -Credential $cred -BaseURI $PVWA -concurrentSession $true -Type LDAP
 
 }
 
@@ -468,4 +472,5 @@ if($failCount -gt 0) {
     $failAccounts | Export-Csv -Path $failDir -NoTypeInformation
 }
 
+Write-Host ""
 # END
