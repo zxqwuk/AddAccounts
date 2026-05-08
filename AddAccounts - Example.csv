@@ -1,0 +1,4 @@
+Name,Password,SafeName,PlatformID,Address,Username,logonAccount,logonHostname,logonSafe,logonPlatform,ReconAccountName,ReconHostname,ReconSafe,ReconPlatform,ParameterName1,ParameterValue1,ParameterName2,ParameterValue2,ParameterName3,ParameterValue3,ParameterName4,ParameterValue4,ParameterName5,ParameterValue5,ParameterName6,ParameterValue6,ParameterName7,ParameterValue7
+,passwd1,TESTING-SAFE,UnixviaSSH,1.2.3.4,reconacc,,,,,,,,,Hostname,server1,ApplicationName,Testing Application,,,,,,,,,,
+,passwd1,TESTING-SAFE,UnixviaSSH,1.2.3.4,logonacc,,,,,reconacc,server1,RECON-SAFE,UnixviaSSH,Hostname,server1,ApplicationName,Testing Application,UseSudoOnReconcile,Yes,,,,,,,,
+,passwd1,TESTING-SAFE,UnixviaSSH,1.2.3.4,cyberark,loginacc,server1,RECON-SAFE,UnixviaSSH,reconacc,server1,RECON-SAFE,UnixviaSSH,Hostname,server1,ApplicationName,Testing Application,UseSudoOnReconcile,Yes,,,,,,,,
